@@ -159,17 +159,17 @@ This sample module contains one small method that filters contigs.
         # return variables are: output
         #BEGIN run_michael_shafferContigFilter_max
         # sanitize inputs
-        for name in ['max_length', 'assembly_ref', 'workspace_name']:
+        for name in ['max_length', 'assembly_input_ref', 'workspace_name']:
             if name not in params:
                 raise ValueError('Parameter %s is required but missing' % name)
         if not isinstance(params['max_length'], int) or (params['max_length'] < 0):
             raise ValueError('Max length must be a non-negative integer')
-        if not isinstance(params['assembly_ref'], str) or not len(params['assembly_ref']):
+        if not isinstance(params['assembly_input_ref'], str) or not len(params['assembly_input_ref']):
             raise ValueError('Pass in a valid assembly reference string')
 
         # get files
         assembly_util = AssemblyUtil(self.callback_url)
-        fasta_file = assembly_util.get_assembly_as_fasta({'ref': params['assembly_ref']})
+        fasta_file = assembly_util.get_assembly_as_fasta({'ref': params['assembly_input_ref']})
 
         # filter fasta
         parsed_assembly = SeqIO.parse(fasta_file['path'], 'fasta')
@@ -214,6 +214,7 @@ This sample module contains one small method that filters contigs.
                              'output is not type dict as required.')
         # return the results
         return [output]
+
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",

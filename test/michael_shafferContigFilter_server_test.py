@@ -107,7 +107,7 @@ class michael_shafferContigFilterTest(unittest.TestCase):
         ref = '79/16/1'
         result = self.serviceImpl.run_michael_shafferContigFilter_max(self.ctx, {
             'workspace_name': self.wsName,
-            'assembly_ref': ref,
+            'assembly_input_ref': ref,
             'max_length': 1000000
         })
 
@@ -121,22 +121,23 @@ class michael_shafferContigFilterTest(unittest.TestCase):
             # assembly ref is wrong type
         with self.assertRaises(ValueError):
             impl.run_michael_shafferContigFilter(ctx,
-                                                 {'workspace_name': ws, 'assembly_ref': 123, 'max_length': 100000})
+                                                 {'workspace_name': ws, 'assembly_input_ref': 123,
+                                                  'max_length': 100000})
         # missing max length
         with self.assertRaises(ValueError):
-            impl.run_michael_shafferContigFilter(ctx, {'workspace_name': ws, 'assembly_ref': 'x'})
+            impl.run_michael_shafferContigFilter(ctx, {'workspace_name': ws, 'assembly_input_ref': 'x'})
         # max length is negative
         with self.assertRaises(ValueError):
-            impl.run_michael_shafferContigFilter(ctx, {'workspace_name': ws, 'assembly_ref': 'x', 'max_length': -1})
+            impl.run_michael_shafferContigFilter(ctx, {'workspace_name': ws, 'assembly_input_ref': 'x', 'max_length': -1})
         # max length is wrong type
         with self.assertRaises(ValueError):
-            impl.run_michael_shafferContigFilter(ctx, {'workspace_name': ws, 'assembly_ref': 'x',
+            impl.run_michael_shafferContigFilter(ctx, {'workspace_name': ws, 'assembly_input_ref': 'x',
                                                        'max_length': 'Hello World'})
 
     def test_run_michael_shafferContigFilter_test_max(self):
         ref = "79/16/1"
         params = {'workspace_name': self.wsName,
-                  'assembly_ref': ref,
+                  'assembly_input_ref': ref,
                   'max_length': 600000}
         result = self.serviceImpl.run_michael_shafferContigFilter_max(self.ctx, params)
         self.assertEqual(result[0]['n_total'], 2)

@@ -1,9 +1,9 @@
 #
 # define display information
 #
-name: Filter Contigs
+name: Filter Contigs Max
 tooltip: |
-    Filters the contigs by removing contigs below a length threshold
+    Filters the contigs by removing contigs above a length threshold
 screenshots: []
 
 icon: null
@@ -34,8 +34,8 @@ parameters :
             The assembly to filter (will be overwritten)
     max_length :
         ui-name : |
-            Min Length Threshold
+            Max Length Threshold
         short-hint : |
-            All contigs below this length will be removed
+            All contigs above this length will be removed
 description : |
     <p>This is a simple method designed to illustrate the KBase SDK.</p>
